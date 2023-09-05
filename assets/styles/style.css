@@ -161,6 +161,11 @@ body {
     width: auto;
 }
 
+/* Humburger */
+.humburger {
+    display: none;
+}
+
 /* Menu ----------------------------------------------------------------------*/
 .menu__list {
     display: flex;
@@ -179,7 +184,6 @@ body {
 
 /* Main block ----------------------------------------------------------------------*/
 .content {
-    margin-bottom: 2rem;
     width: 100%;
     min-height: 100%;
 }
@@ -211,8 +215,10 @@ body {
 /*Divisions ----------------------------------------------------------------------*/
 .division {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
+    margin-bottom: 2rem;
 }
 
 .division__item {

@@ -219,7 +219,7 @@ body {
     flex-basis: calc(25% - 1rem);
     background-color: #ffffff;
     border-radius: 30px;
-    border: 1px solid #ffffff;
+    border: 2px solid #ffffff;
     transition: scale 0.5s;
 }
 

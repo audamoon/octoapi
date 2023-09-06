@@ -119,14 +119,14 @@ body {
     height: 100%;
     font-family: Montseratt;
     font-weight: 400;
-    font-size: 1rem;
+    font-size: 18px;
     font-style: normal;
     line-height: 1.5;
     background-color: #FFE7E7
 }
 .container {
     margin: 0 auto;
-    max-width: 80rem;
+    max-width: 1440px;
 }
 
 .wrapper {
@@ -135,7 +135,7 @@ body {
 
 /* Header ----------------------------------------------------------------------*/
 .global-header{
-    margin-bottom: 2rem;
+    margin-bottom: 36px;
 }
 
 /* .global-header_bordered {
@@ -152,34 +152,103 @@ body {
 .navbar__inner {
     display: flex;
     align-items: center;
-    padding: 1rem;
-    gap: 2rem;
+    padding: 18px;
+    gap: 36px;
 }
 
 .logo-link img {
-    height: 3rem;
+    height: 54px;
     width: auto;
 }
+
+/* burger ----------------------------------------------------------------------*/
+.burger { 
+    z-index: 2;
+    display: none; 
+    position: relative;
+    gap: 18px;
+    height: 60px;
+    width: 50px;
+}
+
+.burger__item, .burger__item::before, .burger__item::after {
+    border-radius: 20px;
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    background-color: #333333;
+    left: 0;
+    transition: all ease 0.2s;
+}
+.burger__item {
+    transform: translate(0%, -50%);
+    left: 0;
+    &::before {
+        top: 18px;
+        content: "";
+
+    }
+    &::after {
+        top: -18px;
+        content: "";
+    }
+}
+.burger__item.open{
+    background:rgba(0,0,0,0);
+}
+.burger__item.open::before {
+    top:0;
+    width: 100%;
+    transform:rotate(135deg);
+	
+}
+.burger__item.open::after{
+    top:0;
+    width: 100%;
+	transform:rotate(45deg);
+	
+}  
 
 /* Menu ----------------------------------------------------------------------*/
 .menu__list {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 2rem;
+    gap: 36px;
 
 }
-
 .menu__link {
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 27px;
     color: #333333;
     transition: color 0.15s;
 }
-
+/* Menu MODAL  ----------------------------------------------------------------------*/
+.menu-modal{
+    position: absolute;
+    background:#ffffff;
+    width: 100%;
+    height: fit-content;
+    display: none;
+    padding: 36px 18px 36px 48px;
+    border-top: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    .menu-container {
+        display: flex;
+        
+    }
+    .menu__list {
+        gap: 18px;
+        flex-direction: column;
+        align-items:baseline;
+    }
+}
+.menu-modal.visible{
+    display: block;
+}
 /* Main block ----------------------------------------------------------------------*/
 .content {
-    margin-bottom: 2rem;
     width: 100%;
     min-height: 100%;
 }
@@ -188,16 +257,16 @@ body {
 .main-title {
     color: #333333;
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 54px;
 }
 
 .main-title__title {
-    font-size: 3rem;
+    font-size: 54px;
     font-weight: 600;
 }
 
 .main-title__subtitile {
-    font-size: 2rem;
+    font-size: 36px;
 }
 
 .main-title__subtitile a {
@@ -211,12 +280,14 @@ body {
 /*Divisions ----------------------------------------------------------------------*/
 .division {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 18px;
+    margin-bottom: 36px;
 }
 
 .division__item {
-    flex-basis: calc(25% - 1rem);
+    flex-basis: calc(25% - 18px);
     background-color: #ffffff;
     border-radius: 30px;
     border: 2px solid #ffffff;
@@ -225,21 +296,21 @@ body {
 
 .division__link {
     display: block;
-    padding: 2rem;
+    padding: 36px;
     color: #333333;
 }
 
 .division__title {
-    font-size: 1.5rem;
+    font-size: 27px;
     font-weight: 600;
 }
 
 .division__icon {
-    margin-bottom: 1rem;
+    margin-bottom: 18px;
 }
 
 .division__icon img {
-    height: 3rem;
+    height: 54px;
     transition: 0.5s;
 }
 
@@ -251,8 +322,14 @@ body {
     border-top: 1px solid #807474
 }
 .footer__about {
-    padding: 2rem 0;
+    padding: 36px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.footer__text {
+    color:#333333
+}
+.footer__link {
+    color:#807474
 }

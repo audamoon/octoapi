@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="../assets/styles/fonts.css">
     <link rel="stylesheet" href="../assets/styles/style.css">
     <link rel="stylesheet" href="../assets/styles/media.css">
+    <script defer src="/assets/js/script.js"></script>
     <title>SEO Scripts</title>
 </head>
 
 <body>
     <div class="wrapper">
+
         <header class="global-header global-header_bordered">
             <nav class="navbar">
                 <div class="navbar__inner">
@@ -24,19 +26,24 @@
                             <li><a class="menu__link" href="/metrika/metrika.html">Метрика</a></li>
                         </ul>
                     </div>
+
+                    <button class="burger" onclick="openBurgerMenu()">
+                        <span class="burger__item"></span>
+                    </button>
                 </div>
             </nav>
         </header>
+        <div class="menu-modal"></div>
         <main class="content">
-                <div class="main-title container">
-                    <h1 class="main-title__title">Все разделы</h1>
-                    <p class="main-title__subtitile">для добавления новых разделов пишите <a target="_blank"
-                            href="https://t.me/audamoon">сюда</a></p>
-                </div> 
+            <div class="main-title container">
+                <h1 class="main-title__title">Все разделы</h1>
+                <p class="main-title__subtitile">для добавления новых разделов пишите <a target="_blank"
+                        href="https://t.me/audamoon">сюда</a></p>
+            </div>
             <div class="division container">
                 <div class="division__item">
                     <a class="division__link" href="/webmaster/webmaster.html">
-                        <div class="division__icon"><img src="/assets/images/icons/webmaster.svg" alt=""></div>
+                        <div class="division__icon"><img src="/assets/images/icons/webmaster.svg" alt="Вебмастер"></div>
                         <h3 class="division__title">Вебмастер</h3>
                         <div class="division__content">
                             <p>Все инструменты для управления Вебмастером</p>
@@ -44,11 +51,10 @@
                     </a>
                 </div>
                 <div class="division__item">
-                    <a class="division__link" href="metrika/metrika.html">
-                        <div class="division__icon"><img src="/assets/images/icons/metrika.svg" alt="">
-                        </div>
+                    <a class="division__link" href="/webmaster/metrika.html">
+                        <div class="division__icon"><img src="/assets/images/icons/metrika.svg" alt="Метрика"></div>
                         <h3 class="division__title">Метрика</h3>
-                        <div class="division__description">
+                        <div class="division__content">
                             <p>Все инструменты для управления Яндекс Метрикой</p>
                         </div>
                     </a>
@@ -56,9 +62,9 @@
             </div>
         </main>
         <footer class="footer footer_bordered container">
-                <div class="footer__about">
-                    <p>Инструменты СЕО</p>
-                    <a target="_blank" href="https://t.me/audamoon" class="about__link">Telegram</a>
+            <div class="footer__about">
+                <p class="footer__text">Инструменты СЕО</p>
+                <a class="footer__link"target="_blank" href="https://t.me/audamoon" class="about__link">Telegram</a>
             </div>
         </footer>
     </div>

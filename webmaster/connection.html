@@ -37,20 +37,35 @@
         <div class="menu-modal"></div>
         <main class="content">
             <div class="main-title container">
-                <h1 class="main-title__title">Все инструменты для Вебмастера</h1>
-                <p class="main-title__subtitile">для добавления новых разделов пишите <a target="_blank"
-                        href="https://t.me/audamoon">сюда</a></p>
+                <h1 class="main-title__title">Добавить домены в счетчик</h1>
+                <p class="main-title__subtitile">Задонатить мани <span class="btn_pink"><a  target="_blank"
+                        href="https://t.me/audamoon">сюда</a></span></p>
             </div>
-            <div class="division container">
-                <div class="division__item">
-                    <a class="division__link" href="/webmaster/connection.html">
-                        <div class="division__icon"><img src="/assets/images/icons/webmaster.svg" alt="Вебмастер"></div>
-                        <h3 class="division__title">Подключить</h3>
-                        <div class="division__content">
-                            <p>Подключить домены к счетчику</p>
+            <div class="tutorial container">
+                <h2 class="tutorial__title">Инструкция</h2>
+                <ol class="tutorial__list beauty-list">
+                    <li class="beauty-list__item">Перейдите по <span class="btn_pink"><a target="_blank"
+                            href="https://oauth.yandex.ru/authorize?response_type=token&client_id=c4f13ce878b04a5d80036fbd053e82ad">ссылке</a></span>
+                        и скопируйте токен
+                    </li>
+                    <li class="beauty-list__item">Вставьте токен</li>
+                    <li class="beauty-list__item">Вставьте номер счетчика</li>
+                    <li class="beauty-list__item">Вставьте домены, которые нужно добавить</li>
+                    <li class="beauty-list__item">Нажмите начать</li>
+                </ol>
+            </div>
+            <div class="container">
+                <form class="form" id="connection" method="post">
+                    <div class="form__double">
+                        <div class="form__block"><label class="form__label" for="input_token" name="token">Токен API
+                                Яндекса</label><input type="text" class="form__input-text" id="input_token"></div>
+                        <div class="form__block"> <label class="form__label" for="input_counter_number" name="counter">Номер
+                                счетчика</label><input type="text" class="form__input-text" id="input_counter_number">
                         </div>
-                    </a>
-                </div>
+                    </div>
+                    <div class="form__block"><label class="form__label" for="input_domens" name="doments">Домены</label><textarea placeholder="Вставьте домены сюда в виде: https://your-domen.com" type="text" class="form__textarea" id="input_domens"></textarea></div>
+                    <input class="btn_pink form__btn" type="submit" value="Начать">
+                </form>
             </div>
         </main>
         <footer class="footer footer_bordered container">

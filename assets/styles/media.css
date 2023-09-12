@@ -12,6 +12,9 @@
     .footer {
         max-width: 90%;
     }
+    .container {
+        max-width: 90%;
+    }
 
 }
 @media (max-width: 600px) {
@@ -45,19 +48,21 @@
     
 }
 @media (min-width: 1440px) {
+    .btn_pink:hover {
+        background-color: #ff9c9c7c;
+        cursor: pointer;
+    }
     .menu__link:hover {
         color: #FF9C9C;
+        cursor: pointer;
     }
-
-    .main-title__subtitile a:hover {
-        background-color: #ff9c9c7c;
-    }
-
     .division__item:hover img {
         transform: scale(1.1);
     }
-
     .division__item:hover {
         border: 2px solid  #8074748e
+    }
+    .beauty-list__item a:hover {
+        opacity: 0.8;
     }
 }

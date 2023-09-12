@@ -15,9 +15,11 @@
     .container {
         max-width: 90%;
     }
-
 }
 @media (max-width: 600px) {
+    .form__double {
+        flex-direction: column;
+    }
     .menu-container {
         display: none;
     }
@@ -47,7 +49,7 @@
     }
     
 }
-@media (min-width: 1440px) {
+@media (min-width: 800px) {
     .btn_pink:hover {
         background-color: #ff9c9c7c;
         cursor: pointer;

@@ -283,7 +283,13 @@ body {
 
 .main-title__subtitile {
     font-size: 36px;
+    line-height: 1;
 }
+
+.main-title__subtitile .btn_pink {
+    padding: 0px 5px 5px 5px;
+}
+
 /* general buttons ----------------------------------------------------------------------*/
 .btn_pink {
     background-color: #FF9C9C;
@@ -370,6 +376,34 @@ body {
     width: 24px;
     height: 24px;
     text-align: center;
+}
+
+/* Result window ----------------------------------------------------------------------*/
+.result-window,.result-window_fail,.result-window_success{
+    transition: all 0.25s;
+}
+
+.result-window {
+    visibility: hidden;
+    z-index: 2;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    padding: 16px;
+    font-size: 24px;
+    font-weight: 700;
+    
+}
+.result-window span {
+    color: white;
+}
+.result-window_success{
+    visibility: visible;
+    background-color: #7FB38D;
+}
+.result-window_fail{
+    visibility: visible;
+    background-color: #e65454;
 }
 
 /* Forms ----------------------------------------------------------------------*/

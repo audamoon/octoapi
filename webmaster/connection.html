@@ -9,12 +9,15 @@
     <link rel="stylesheet" href="../assets/styles/media.css">
     <link rel="icon" type="image/x-icon" href="../assets/images/icons/favicon.svg">
     <script defer src="../assets/js/script.js"></script>
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+    </script>
     <title>Вебмастер | Подключить счетчики - SEO Scripts</title>
 </head>
 
 <body>
+    <div class="result-window"><span></span></div>
     <div class="wrapper">
-
         <header class="global-header global-header_bordered">
             <nav class="navbar">
                 <div class="navbar__inner">
@@ -38,7 +41,7 @@
         <main class="content">
             <div class="main-title container">
                 <h1 class="main-title__title">Добавить домены в счетчик</h1>
-                <p class="main-title__subtitile">Задонатить мани <span class="btn_pink"><a  target="_blank"
+                <p class="main-title__subtitile">Подарить надежду <span class="btn_pink"><a  target="_blank"
                         href="https://t.me/audamoon">сюда</a></span></p>
             </div>
             <div class="tutorial container">
@@ -55,15 +58,15 @@
                 </ol>
             </div>
             <div class="container">
-                <form class="form" id="connection" method="post">
+                <form class="form" id="connection">
                     <div class="form__double">
                         <div class="form__block"><label class="form__label" for="input_token" name="token">Токен API
-                                Яндекса</label><input type="text" class="form__input-text" id="input_token"></div>
+                                Яндекса</label><input type="text" class="form__input-text" id="input_token" name="token"></div>
                         <div class="form__block"> <label class="form__label" for="input_counter_number" name="counter">Номер
-                                счетчика</label><input type="text" class="form__input-text" id="input_counter_number">
+                                счетчика</label><input type="text" class="form__input-text" id="input_counter_number" name="counter">
                         </div>
                     </div>
-                    <div class="form__block"><label class="form__label" for="input_domens" name="doments">Домены</label><textarea placeholder="Вставьте домены сюда в виде: https://your-domen.com" type="text" class="form__textarea" id="input_domens"></textarea></div>
+                    <div class="form__block"><label class="form__label" for="input_domens" name="doments">Домены</label><textarea placeholder="Вставьте домены сюда в виде: your-domen.com" type="text" class="form__textarea" id="input_domens" name="domens"></textarea></div>
                     <input class="btn_pink form__btn" type="submit" value="Начать">
                 </form>
             </div>
@@ -75,6 +78,53 @@
             </div>
         </footer>
     </div>
+    <script>
+        $(document).ready(function () {                
+            $('#connection').submit(function (event) {
+                event.preventDefault();                
+                var form = document.getElementById('connection');
+                var formData = new FormData(form);
+               
+                $.ajax({
+                    url: '/src/webmaster.php',
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if (response == "Empty fields") {
+                            let message = document.querySelector(".result-window");
+                            message.classList.toggle("result-window_fail")
+                            message.textContent = ':-('
+                            setTimeout(() => {
+                                message.classList.toggle("result-window_success_fail")
+                            }, 2000);
+                        } else {
+                            let message = document.querySelector(".result-window");
+                            if (message.classList.contains("result-window_fail")) { 
+                                message.classList.toggle("result-window_fail");
+                            }
+                            message.firstChild.textContent = 'Домены ВОЗМОЖНО добавлены :-)';
+                            message.classList.toggle("result-window_success");
+                            setTimeout(() => {
+                                message.classList.toggle("result-window_success");
+                            }, 2000);
+                        }
+                        
+
+                    },
+                    error: function (xhr, status, error) {                       
+                        let message = document.querySelector(".result-window");
+                        message.classList.toggle("result-window_fail")
+                        message.textContent = ':-(' + error
+                        setTimeout(() => {
+                            message.classList.toggle("result-window_success_fail")
+                        }, 2000);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

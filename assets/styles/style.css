@@ -311,6 +311,9 @@ body {
 }
 
 .division__item {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     flex-basis: calc(25% - 18px);
     background-color: #ffffff;
     border-radius: 30px;

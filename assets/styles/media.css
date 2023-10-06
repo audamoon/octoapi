@@ -56,8 +56,12 @@
     
 }
 @media (min-width: 800px) {
-    .btn_pink:hover {
-        background-color: #ff9c9c7c;
+    .form__btn:hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
+    .btn_pink a:hover {
+        color: rgb(255, 119, 119);
         cursor: pointer;
     }
     .menu__link:hover {
@@ -69,8 +73,5 @@
     }
     .division__item:hover {
         border: 2px solid  #8074748e
-    }
-    .beauty-list__item a:hover {
-        opacity: 0.8;
     }
 }

@@ -2,7 +2,7 @@
     <nav class="navbar">
         <div class="navbar__inner">
             <a href="/" class="logo-link">
-                <img src="/assets/images/icons/main_logo.svg" alt="СЕО">
+                <img src="/assets/images/icons/main_logo.png" alt="СЕО">
             </a>
             <div class="menu-container menu">
                 <ul class="menu__list">

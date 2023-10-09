@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <script>let script_path = '/src/test_ajax.php';</script>
-<?php $title = "Вебмастер | Добавить домены - SEO Scripts";
+<?php $title = "Вебмастер | Добавить домены — Octoapi";
 include  "../assets/layouts/head.php"; ?>
 
 <body>

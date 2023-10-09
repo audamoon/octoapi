@@ -154,7 +154,7 @@ body {
     display: flex;
     align-items: center;
     padding: 18px;
-    gap: 36px;
+    gap: 12px;
 }
 
 .logo-link img {

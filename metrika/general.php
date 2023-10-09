@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <?php 
-$title = "Метрика - SEO Scripts";
+$title = "Метрика — Octoapi";
 include '../assets/layouts/head.php' ?>
 
 

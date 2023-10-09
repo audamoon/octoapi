@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 
-<?php $title = "Метрика | Добавить поддомены - SEO Scripts";
+<?php $title = "Метрика | Добавить поддомены — Octoapi";
 include "../assets/layouts/head.php"; ?>
 
 <body>

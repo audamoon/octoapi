@@ -2,7 +2,7 @@
 <html lang="ru">
 
 <?php
-$title = "Вебмастер - SEO Scripts";
+$title = "Вебмастер — Octoapi";
 include '../assets/layouts/head.php'; ?>
 
 <body>
@@ -17,6 +17,7 @@ include '../assets/layouts/head.php'; ?>
                 include  '../assets/layouts/item.php';
                 add_item("Добавить", "Добавить домены в Вебмастер", "/assets/images/icons/webmaster.svg", "/webmaster/add.php", "Вебмастер");
                 add_item("Права", "Запустить проверку прав", "/assets/images/icons/webmaster.svg", "/webmaster/verify.php", "Вебмастер");
+                add_item("Удалить", "Удалить домены из Вебмастера", "/assets/images/icons/webmaster.svg", "/webmaster/delete.php", "Вебмастер");
                 ?>
             </div>
         </main>

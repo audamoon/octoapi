@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
-
-<?php $title = "Вебмастер | Проверка прав — Octoapi";
+<script>let script_path = '/src/test_ajax.php';</script>
+<?php $title = "Вебмастер | Удалить домены — Octoapi";
 include  "../assets/layouts/head.php"; ?>
 
 <body>
@@ -10,8 +10,11 @@ include  "../assets/layouts/head.php"; ?>
         <?php include  "../assets/layouts/header.php" ?>
         <div class="menu-modal"></div>
         <main class="content">
-            <?php include '../assets/layouts/title.php';
-            create_title("Запустить проверку прав", "По предложениям писать", "сюда");?>
+            <div class="main-title container">
+                <h1 class="main-title__title">Удалить домены в Вебмастер</h1>
+                <p class="main-title__subtitile">По предложениям писать <span class="btn_pink"><a  target="_blank"
+                        href="https://t.me/audamoon">сюда</a></span></p>
+            </div>
             <div class="container">
                 <form class="form" id="connection">
                     <input type="hidden" name="page_url" value="<?= $_SERVER['REQUEST_URI'] ?>" />
@@ -19,14 +22,12 @@ include  "../assets/layouts/head.php"; ?>
                         <div class="form__block"><label class="form__label" for="input_token" name="token">Токен API
                                 Яндекса</label><input type="text" class="form__input-text" id="input_token" name="token"></div>
                     </div>
+                    <div class="form__block"><label class="form__label" for="input_domens" name="doments">Домены для удаления</label><textarea placeholder="Вставьте домены сюда в виде: https://your-domen.com" type="text" class="form__textarea" id="input_domens" name="domens"></textarea></div>
                     <input class="form__btn" type="submit" value="Начать">
-                    
                 </form>
             </div>
         </main>
         <?php include  "../assets/layouts/footer.php" ?>
     </div>
-
 </body>
-
 </html>

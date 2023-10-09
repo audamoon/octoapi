@@ -90,7 +90,7 @@ class YandexWebmaster
         return $res;
     }
 
-    public function domensVerification()
+    public function verificationDomens()
     {
         set_time_limit(0);
         $hosts = $this->getHosts();
@@ -112,6 +112,30 @@ class YandexWebmaster
             sleep(1);
             usleep(210000);
         }
+        return $res;
+    }
+
+    public function deleteDomen($host_id)
+    {
+        $uri = 'user/' . $this->getUser() . '/hosts/' . $host_id;
+        $options = $this->getHeader();
+
+        $res = $this->httpclient->DELETE($uri, $options);
+
+        return $res;
+    }
+
+    public function deleteDomens()
+    {
+        set_time_limit(0);
+        $hosts = $this->getHosts();
+
+        foreach ($hosts as $host) {
+            $res = $this->deleteDomen($host['host_id']);
+            sleep(1);
+            usleep(210000);
+        }
+
         return $res;
     }
 }
@@ -231,7 +255,7 @@ class YandexController
                         return $this->api->addDomens();
                         break;
                     case ('verify.php'):
-                        return $this->api->domensVerification();
+                        return $this->api->verificationDomens();
                         break;
                 }
                 break;

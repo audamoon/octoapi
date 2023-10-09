@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="../assets/styles/fonts.css">
 <link rel="stylesheet" href="../assets/styles/style.css">
 <link rel="stylesheet" href="../assets/styles/media.css">
-<link rel="icon" type="image/x-icon" href="../assets/images/icons/favicon.svg">
+<link rel="icon" type="image/x-icon" href="../assets/images/icons/favicon.png">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="../../assets/js/script.js"></script>
 <script src="../../assets/js/ajax.js"></script>

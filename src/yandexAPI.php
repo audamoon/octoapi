@@ -12,7 +12,7 @@ class YandexWebmaster
         $this->httpclient = new GuzzleHttp\Client(['base_uri' => 'https://api.webmaster.yandex.net/v4/']);
         $this->sanitize_data = $sanitize_data;
     }
-
+    
     private function getHeader()
     {
         return [
@@ -116,7 +116,7 @@ class YandexWebmaster
         return $res->getStatusCode();
     }
 
-    public function deleteDomen($delete_host_id)
+    private function deleteDomen($delete_host_id)
     {
         $uri = 'user/' . $this->getUser() . '/hosts/' . $delete_host_id;
         $options = $this->getHeader();
@@ -135,12 +135,15 @@ class YandexWebmaster
             $hosts = array_column($this->getHosts(), "host_id");
 
             if (!in_array($domen, $hosts)) {
-                array_diff($domens, [$domen]);
+                $domens = array_diff($domens, [$domen]);
             }
         }
 
-        foreach ($domens as $domen) {
+        if (empty($domens)) {
+            return "nothing to delete";
+        }
 
+        foreach ($domens as $domen) {
             $res = $this->deleteDomen($domen);
             sleep(1);
             usleep(210000);

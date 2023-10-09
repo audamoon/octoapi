@@ -15,9 +15,8 @@ class FormSanitizer
 
     public function getSanitizeData()
     {
-        if (!empty($this->post_data["domens"])) {
-            $this->getHostIDs();
-        }
+        $this->getHostIDs();
+
         if (!empty($this->post_data["token"])) {
             $this->saniitize_data["token"] = $this->post_data["token"];
         }
@@ -54,11 +53,11 @@ class FormSanitizer
 
     private function getHostIDs()
     {
-        $domens = $this->sanitizeStr($this->post_data["domens"]);
-
-        if (empty($domens)) {
-            http_response_code(400);
+        if (empty($this->post_data["domens"])) {
+            http_response_code(410);
         }
+
+        $domens = $this->sanitizeStr($this->post_data["domens"]);
 
         $domens = preg_split('/\r?\s/', $this->post_data["domens"]);
         $domens = array_map("FormSanitizer::createHostID", $domens);

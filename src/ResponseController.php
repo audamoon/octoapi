@@ -59,7 +59,6 @@ class ResponseController
 
 
 $sanitizer = new FormSanitizer($_POST);
-
 $yandex = new ResponseController($sanitizer->getSanitizeData());
 $res = $yandex->executeMethod();
 print_r($res);

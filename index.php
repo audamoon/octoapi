@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
-<?php $title = "Octoapi";
+<?php $title = "Octoapi — помощник для API 😎";
 include_once 'assets/layouts/head.php'; ?>
 
 <body>

@@ -1,9 +1,9 @@
 function successAction(message){
-    alert(message);
+    alert("Успех", message);
 }
 
 function errorAction(message){
-    alert(message);
+    alert("Ошибка:", message);
 }
 
 function checkData(formData){
@@ -15,7 +15,7 @@ $(document).ready(function () {
         event.preventDefault();
         let formData = new FormData($('#connection')[0]);
         $.ajax({
-            url: "/src/yandexAPI.php",
+            url: "/src/ResponseController.php",
             method: 'POST',
             data: formData,
             processData: false,
@@ -24,8 +24,9 @@ $(document).ready(function () {
                 successAction(response)
             },
             error: function (xhr, status, error) {
-                errorAction(error)
+                alert(xhr.status + " " + xhr.statusText);
             }
         });
     });
 });
+//((http|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6} - ввод проверки

@@ -10,3 +10,4 @@ function openBurgerMenu() {
         navbar.appendChild(menu)
     }
 }
+

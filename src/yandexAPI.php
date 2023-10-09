@@ -1,24 +1,23 @@
 <?php
-
 require_once '../vendor/autoload.php';
 
 
 class YandexWebmaster
 {
     private $httpclient;
-    private $post_data;
+    private $sanitize_data;
 
-    public function __construct($post_data)
+    public function __construct($sanitize_data)
     {
         $this->httpclient = new GuzzleHttp\Client(['base_uri' => 'https://api.webmaster.yandex.net/v4/']);
-        $this->post_data = $post_data;
+        $this->sanitize_data = $sanitize_data;
     }
 
     private function getHeader()
     {
         return [
             'headers' => [
-                'Authorization' => 'OAuth ' . $this->post_data['token'],
+                'Authorization' => 'OAuth ' . $this->sanitize_data['token'],
                 'Content-Type' => 'application/json'
             ]
         ];
@@ -45,18 +44,19 @@ class YandexWebmaster
     public function addDomens()
     {
         set_time_limit(0);
+
         $uri = 'user/' . $this->getUser() . "/hosts";
-        $domens = explode("\n", $_POST["domens"]);
+        $domens = $this->sanitize_data["domens"];
         $unlink_domens = [];
 
         foreach ($domens as $domen) {
-            $hosts = array_column($this->getHosts(), "unicode_host_url");
-            $domen = trim($domen);
+            $hosts = array_column($this->getHosts(), "host_id");
 
-            if (!in_array($domen . '/', $hosts)) {
+            if (!in_array($domen, $hosts)) {
                 array_push($unlink_domens, $domen);
             }
         }
+
         if (empty($unlink_domens)) {
             echo "nothing to add";
             return null;
@@ -66,9 +66,10 @@ class YandexWebmaster
             $body = [
                 'json' =>
                 [
-                    'host_url' => $domen
+                    'host_url' => str_replace(["http:", "https:", ":80", ":443"], ["http://", "https://", "", ""], $domen)
                 ]
             ];
+
             $options = $this->getHeader() + $body;
 
             $res = $this->httpclient->post($uri, $options);
@@ -77,7 +78,7 @@ class YandexWebmaster
             usleep(210000);
         }
 
-        return $res;
+        return $res->getStatusCode();
     }
 
     private function verifyDomen($host_id)
@@ -112,15 +113,15 @@ class YandexWebmaster
             sleep(1);
             usleep(210000);
         }
-        return $res;
+        return $res->getStatusCode();
     }
 
-    public function deleteDomen($host_id)
+    public function deleteDomen($delete_host_id)
     {
-        $uri = 'user/' . $this->getUser() . '/hosts/' . $host_id;
+        $uri = 'user/' . $this->getUser() . '/hosts/' . $delete_host_id;
         $options = $this->getHeader();
 
-        $res = $this->httpclient->DELETE($uri, $options);
+        $res = $this->httpclient->delete($uri, $options);
 
         return $res;
     }
@@ -128,10 +129,19 @@ class YandexWebmaster
     public function deleteDomens()
     {
         set_time_limit(0);
-        $hosts = $this->getHosts();
+        $domens = $this->sanitize_data["domens"];
 
-        foreach ($hosts as $host) {
-            $res = $this->deleteDomen($host['host_id']);
+        foreach ($domens as $domen) {
+            $hosts = array_column($this->getHosts(), "host_id");
+
+            if (!in_array($domen, $hosts)) {
+                array_diff($domens, [$domen]);
+            }
+        }
+
+        foreach ($domens as $domen) {
+
+            $res = $this->deleteDomen($domen);
             sleep(1);
             usleep(210000);
         }
@@ -143,19 +153,19 @@ class YandexWebmaster
 class YandexMetrika
 {
     private $httpclient;
-    private $post_data;
+    private $sanitize_data;
 
-    public function __construct($post_data)
+    public function __construct($sanitize_data)
     {
         $this->httpclient = new GuzzleHttp\Client(['base_uri' => 'https://api-metrika.yandex.net/management/v1/']);
-        $this->post_data = $post_data;
+        $this->sanitize_data = $sanitize_data;
     }
 
     private function getHeader()
     {
         return [
             'headers' => [
-                'Authorization' => 'OAuth ' . $this->post_data['token'],
+                'Authorization' => 'OAuth ' . $this->sanitize_data['token'],
                 'Content-Type' => 'application/json'
             ]
         ];
@@ -163,7 +173,7 @@ class YandexMetrika
 
     private function getMirrors()
     {
-        $uri = 'counter/' . $this->post_data['counter'];
+        $uri = 'counter/' . $this->sanitize_data['counter'];
         $options = $this->getHeader();
 
         $res = $this->httpclient->get($uri, $options);
@@ -185,11 +195,11 @@ class YandexMetrika
 
     public function addDomens()
     {
-        $domens = explode("\n", $this->post_data['domens']);
+        $domens = $this->sanitize_data['domens'];
         $mirrors = $this->getMirrors();
 
         foreach ($domens as $domen) {
-            $domen = trim($domen);
+            $domen = str_replace(["https:", "http:", ":443", ":80"], '', $domen);
             if (!in_array(['site' => $domen], $mirrors)) {
                 $mirrors[] = ['site' => $domen];
             }
@@ -203,7 +213,7 @@ class YandexMetrika
             ]
         ];
 
-        $uri = 'counter/' . $this->post_data['counter'];
+        $uri = 'counter/' . $this->sanitize_data['counter'];
         $options = $this->getHeader() + $body;
 
         $res = $this->httpclient->put($uri, $options);
@@ -211,57 +221,3 @@ class YandexMetrika
         return $res;
     }
 }
-
-class YandexController
-{
-    private $post_data;
-    private $api;
-
-    public function __construct($post_data)
-    {
-        $this->post_data = $post_data;
-    }
-
-    private function chooseAPI()
-    {
-        $page_api = explode('/', $this->post_data['page_url'])[1];
-
-        switch ($page_api) {
-            case ('metrika'):
-                $this->api = new YandexMetrika($this->post_data);
-                break;
-            case ('webmaster'):
-                $this->api = new YandexWebmaster($this->post_data);
-                break;
-        }
-    }
-
-    public function executeMethod()
-    {
-        $this->chooseAPI();
-
-        $page_api_method = explode('/', $this->post_data['page_url'])[2];
-        switch (true) {
-            case ($this->api instanceof YandexMetrika):
-                switch ($page_api_method) {
-                    case ('add.php'):
-                        return $this->api->addDomens();
-                        break;
-                }
-                break;
-            case ($this->api instanceof YandexWebmaster):
-                switch ($page_api_method) {
-                    case ('add.php'):
-                        return $this->api->addDomens();
-                        break;
-                    case ('verify.php'):
-                        return $this->api->verificationDomens();
-                        break;
-                }
-                break;
-        }
-    }
-}
-$yandex = new YandexController($_POST);
-$res = $yandex->executeMethod();
-print_r($res);

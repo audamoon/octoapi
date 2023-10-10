@@ -15,15 +15,16 @@ class FormSanitizer
 
     public function getSanitizeData()
     {
-        $this->getHostIDs();
-
-        if (!empty($this->post_data["token"])) {
+        if (array_key_exists("domens", $this->post_data)){
+            $this->getHostIDs();
+        }
+        if (array_key_exists("token", $this->post_data)){
             $this->saniitize_data["token"] = $this->post_data["token"];
         }
-        if (!empty($this->post_data["counter"])) {
+        if (array_key_exists("counter", $this->post_data)){
             $this->saniitize_data["counter"] = $this->post_data["counter"];
         }
-        if (!empty($this->post_data["page_url"])) {
+        if (array_key_exists("page_url", $this->post_data)){
             $this->saniitize_data["page_url"] = $this->post_data["page_url"];
         }
 

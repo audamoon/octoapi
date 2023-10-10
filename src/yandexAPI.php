@@ -44,14 +44,12 @@ class YandexWebmaster
     public function addDomens()
     {
         set_time_limit(0);
-
+        
         $uri = 'user/' . $this->getUser() . "/hosts";
         $domens = $this->sanitize_data["domens"];
-        $unlink_domens = [];
-
+        $hosts = array_column($this->getHosts(), "host_id");
+        
         foreach ($domens as $domen) {
-            $hosts = array_column($this->getHosts(), "host_id");
-
             if (!in_array($domen, $hosts)) {
                 array_push($unlink_domens, $domen);
             }
@@ -113,6 +111,7 @@ class YandexWebmaster
             sleep(1);
             usleep(210000);
         }
+
         return $res->getStatusCode();
     }
 
@@ -130,10 +129,9 @@ class YandexWebmaster
     {
         set_time_limit(0);
         $domens = $this->sanitize_data["domens"];
+        $hosts = array_column($this->getHosts(), "host_id");
 
         foreach ($domens as $domen) {
-            $hosts = array_column($this->getHosts(), "host_id");
-
             if (!in_array($domen, $hosts)) {
                 $domens = array_diff($domens, [$domen]);
             }

@@ -12,7 +12,7 @@ class YandexWebmaster
         $this->httpclient = new GuzzleHttp\Client(['base_uri' => 'https://api.webmaster.yandex.net/v4/']);
         $this->sanitize_data = $sanitize_data;
     }
-    
+
     private function getHeader()
     {
         return [
@@ -44,16 +44,18 @@ class YandexWebmaster
     public function addDomens()
     {
         set_time_limit(0);
-        
+
         $uri = 'user/' . $this->getUser() . "/hosts";
         $domens = $this->sanitize_data["domens"];
         $hosts = array_column($this->getHosts(), "host_id");
-        
+        $unlink_domens = [];
+
         foreach ($domens as $domen) {
             if (!in_array($domen, $hosts)) {
                 array_push($unlink_domens, $domen);
             }
         }
+
 
         if (empty($unlink_domens)) {
             echo "nothing to add";

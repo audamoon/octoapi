@@ -41,7 +41,7 @@ include "../assets/layouts/head.php"; ?>
                     </div>
                     <div class="form__block"><label class="form__label" for="input_domens"
                             name="doments">Домены</label><textarea
-                            placeholder="Вставьте домены сюда в виде: your-domen.com" type="text" class="form__textarea"
+                            placeholder="Вставьте домены сюда в виде: https://your-domen.com" type="text" class="form__textarea"
                             id="input_domens" name="domens"></textarea></div>
                     <input class="form__btn" type="submit" value="Начать">
                 </form>
